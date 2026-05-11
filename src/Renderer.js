@@ -10,6 +10,9 @@ class Renderer {
 
         this.tile_size = 8;
         this.tile_d_size = this.tile_size * screen_multiplier;
+
+        this.len_x = screen_width / this.tile_d_size;
+        this.len_y = screen_height / this.tile_d_size;
     }
 
     ClearScreen() {
@@ -19,7 +22,7 @@ class Renderer {
     }
 
     Draw() {
-        this.DrawMap(test_room_map);
+        this.DrawMap(test_room_layer_1);
     }
 
     LoadTileMap(path) {
@@ -27,19 +30,16 @@ class Renderer {
     }
 
     DrawMap(map_data) {
-        const len_x = map_data[0].length;
-        const len_y = map_data.length;
-
-        for (let y = 0; y < len_y; y++) {
-            for (let x = 0; x < len_x; x++) {
+        for (let y = 0; y < this.len_y; y++) {
+            for (let x = 0; x < this.len_x; x++) {
                 const tile_i = map_data[y][x];
 
                 const tilemap_x = this.current_tile_map.width / this.tile_size;
                 const tilemap_y = this.current_tile_map.height / this.tile_size;
 
                 // Tile map coordinates
-                const sx = tile_i % tilemap_x;
-                const sy = tile_i / tilemap_y;
+                const sx = tile_i % tilemap_x * this.tile_size;
+                const sy = Math.floor(tile_i / tilemap_y) * this.tile_size;
 
                 // Canvas coordinates
                 const dx = x * this.tile_d_size;
@@ -47,16 +47,9 @@ class Renderer {
 
                 this.ctx.drawImage(
                     this.current_tile_map,
-                    sx,
-                    sy,
-                    this.tile_size,
-                    this.tile_size,
-                    dx,
-                    dy,
-                    this.tile_d_size,
-                    this.tile_d_size
+                    sx, sy, this.tile_size, this.tile_size,
+                    dx, dy, this.tile_d_size, this.tile_d_size
                 )
-
             }
         }  
     }
