@@ -22,6 +22,7 @@ class Renderer {
     }
 
     Draw() {
+        this.ctx.imageSmoothingEnabled = false;
         this.DrawMap(test_room_layer_1);
     }
 

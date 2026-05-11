@@ -2,7 +2,7 @@ const CANVAS = document.getElementById("canvas");
 const CONTEXT = CANVAS.getContext("2d");
 
 // Screen Constants
-const SCREEN_MULT = 1;
+const SCREEN_MULT = 5;
 const RES_X = 160 * SCREEN_MULT;
 const RES_Y = 144 * SCREEN_MULT;
 const FPS = 60;
