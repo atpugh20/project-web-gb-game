@@ -1,14 +1,14 @@
 class Renderer {
     constructor(screen_width, screen_height, canvas_context, screen_multiplier) {
-        this.screen_width = screen_width;
-        this.screen_height = screen_height;
-        this.screen_multiplier = screen_multiplier;
+        this.screen_width       = screen_width;
+        this.screen_height      = screen_height;
+        this.screen_multiplier  = screen_multiplier;
 
-        this.ctx = canvas_context;
+        this.ctx              = canvas_context;
         this.background_color = "black";
         this.current_tile_map = new Image();
 
-        this.tile_size = 8;
+        this.tile_size   = 8;
         this.tile_d_size = this.tile_size * screen_multiplier;
 
         this.len_x = screen_width / this.tile_d_size;
@@ -34,7 +34,6 @@ class Renderer {
         for (let y = 0; y < this.len_y; y++) {
             for (let x = 0; x < this.len_x; x++) {
                 const tile_i = map_data[y][x];
-
                 const tilemap_x = this.current_tile_map.width / this.tile_size;
                 const tilemap_y = this.current_tile_map.height / this.tile_size;
 
